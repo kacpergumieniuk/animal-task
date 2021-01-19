@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -5,7 +7,7 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Poppins, sans-serif;
   background-color: #eee;
 }
 
@@ -30,10 +32,11 @@ form {
 
 form input {
   padding: 10px;
+  padding-left: 20px;
   cursor: pointer;
   background: white;
   outline: none;
-  border: 3px solid rgb(98, 170, 98);
+  border: none;
   border-radius: 18px;
   font-size: 18px;
   margin-right: 20px;
