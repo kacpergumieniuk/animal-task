@@ -4,6 +4,7 @@ const url_sold = 'https://petstore.swagger.io/v2/pet/findByStatus?status=sold'
 
 const results = document.getElementById('results');
 const input = document.getElementById('input');
+const no = document.getElementById('no')
 
 let available_result;
 let pending_result;
@@ -47,7 +48,7 @@ function resultsMaker(){
             window.className = 'result';
         
             window.innerHTML = ` <p>${el.name}</p>
-            <button>Buy</button>`
+            <button onclick=confirmationAsk()>Buy</button>`
             results.appendChild(window);
         
            });
@@ -60,8 +61,7 @@ function resultsMaker(){
             const window = document.createElement('div');
             window.className = 'result';
         
-            window.innerHTML = ` <p>${el.name}</p>
-            <button>Buy</button>`
+            window.innerHTML = ` <p>${el.name}</p>`
             results.appendChild(window);
         
            });
@@ -74,8 +74,7 @@ function resultsMaker(){
         const window = document.createElement('div');
         window.className = 'result';
     
-        window.innerHTML = ` <p>${el.name}</p>
-        <button>Buy</button>`
+        window.innerHTML = ` <p>${el.name}</p>`
         results.appendChild(window);
     
        });
@@ -83,4 +82,41 @@ function resultsMaker(){
    
 }
 
+function removeParent(){
+    document.querySelector('.confirmation').remove();
+}
+
+function confirmationAsk(){
+    const window = document.createElement('div');
+    window.className = 'confirmation' ;
+    window.innerHTML = `<p>Are you sure?</p>
+    <div class="answer">
+    <div class="yes">Yes</div>
+    <div class="no" id="no" onclick=removeParent()>No</div>
+    </div>`
+    document.body.appendChild(window);
+}
+
 Init();
+
+
+/* const obj = 
+{
+    "id": 0,
+    "petId": 0,
+    "quantity": 0,
+    "shipDate": "2021-01-19T21:20:27.538Z",
+    "status": "placed",
+    "complete": true
+  }
+
+
+const options = {
+    method: 'POST',
+    headers: {
+        'Content-type' : 'application/json'
+    },
+    body:JSON.stringify(obj)
+};
+
+fetch('https://petstore.swagger.io/v2/store/order', options) */
