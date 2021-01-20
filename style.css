@@ -12,6 +12,41 @@ body {
   position: relative;
 }
 
+.success {
+  position: absolute;
+  width: 60vw;
+  height: 40vh;
+  background-color: white;
+  margin: 0 auto;
+  left: calc(50% - 30vw);
+  top: 200px;
+  border-radius: 24px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.success p {
+  font-size: 42px;
+  margin-bottom: 40px;
+}
+
+.ok {
+  padding: 10px 20px;
+  background-color: rgb(98, 170, 98);
+  border-radius: 20px;
+  color: white;
+  margin: 0 30px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.ok:hover {
+  background-color: rgb(138, 202, 138);
+}
+
 .confirmation {
   position: absolute;
   width: 60vw;
@@ -45,6 +80,11 @@ body {
   color: white;
   margin: 0 30px;
   cursor: pointer;
+  transition: 0.4s;
+}
+
+.yes:hover {
+  background-color: rgb(138, 202, 138);
 }
 
 .no {
@@ -54,6 +94,11 @@ body {
   color: white;
   margin: 0 30px;
   cursor: pointer;
+  transition: 0.4s;
+}
+
+.no:hover {
+  background-color: rgb(155, 49, 49);
 }
 
 header {
@@ -97,6 +142,12 @@ form input {
   border: none;
   display: flex;
   align-items: center;
+  transition: 0.4s;
+  color: white;
+}
+
+.button:hover {
+  background-color: rgb(138, 202, 138);
 }
 
 .result {

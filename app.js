@@ -1,3 +1,5 @@
+//Variables
+
 const url_pending = 'https://petstore.swagger.io/v2/pet/findByStatus?status=pending';
 const url_available = 'https://petstore.swagger.io/v2/pet/findByStatus?status=available'
 const url_sold = 'https://petstore.swagger.io/v2/pet/findByStatus?status=sold'
@@ -6,12 +8,14 @@ const results = document.getElementById('results');
 const input = document.getElementById('input');
 const no = document.getElementById('no')
 const header = document.getElementById('header')
+const success = document.getElementById('success')
 
 let available_result;
 let pending_result;
 let sold_result;
 
 
+//Init, GET request for the animals
 
 async function Init(){
     console.log('Loading...');
@@ -28,20 +32,18 @@ async function Init(){
     console.log(sold_result);
 
     console.log('Loaded...')
-
-
 }
 
 
 
-
+//Creating a list of elements from GET request
 
 function resultsMaker(){
     results.innerHTML = "";
 
     if(input.value === 'Available'){
-        
-       
+
+        input.style.border = 'none'
         
         available_result.forEach(el => {
 
@@ -55,20 +57,27 @@ function resultsMaker(){
            });
     }
 
-   if(input.value === 'Pending'){
-            
-            pending_result.forEach(el => {
+    else if(input.value === 'Pending'){
 
-            const window = document.createElement('div');
-            window.className = 'result';
+        input.style.border = 'none'
+                
+            
+    
+        pending_result.forEach(el => {
+
+        const window = document.createElement('div');
+         window.className = 'result';
         
-            window.innerHTML = ` <p>${el.name}</p>`
-            results.appendChild(window);
+        window.innerHTML = ` <p>${el.name}</p>`
+        results.appendChild(window);
         
-           });
+        });
     }
     
-    if(input.value === 'Sold'){
+    else if(input.value === 'Sold'){
+
+        input.style.border = 'none'
+        
             
         sold_result.forEach(el => {
 
@@ -79,15 +88,22 @@ function resultsMaker(){
         results.appendChild(window);
     
        });
-}
-   
+       
+       
+    }   
+
+    else{
+        input.style.border = '2px solid red'
+    }
+
 }
 
-function removeParent(){
-    document.querySelector('.confirmation').remove();
-}
+
+
+//Onclick function after pressing BUY button.
 
 function confirmationAsk(id){
+
     header.scrollIntoView();
     
     const window = document.createElement('div');
@@ -100,53 +116,64 @@ function confirmationAsk(id){
     document.body.appendChild(window);
 }
 
+//Onclick event of YES button of confirmation alert.
+
 function buyAnimal(id){
-    console.log(id)
+
+    
     const obj = 
-{
-    "id": id,
-    "petId": id,
-    "quantity": 0,
-    "shipDate": "2021-01-19T21:20:27.538Z",
-    "status": "placed",
-    "complete": true
-  }
+     {
+         "id": id,
+         "petId": id,
+         "quantity": 0,
+         "shipDate": '2021-01-20T00:59:57.909Z',
+         "status": "placed",
+         "complete": true
+     }
 
 
-const options = {
+    const options = {
     method: 'POST',
     headers: {
-        'Content-type' : 'application/json'
+        'Content-Type' : 'application/json'
     },
     body:JSON.stringify(obj)
-};
+        };
 
-fetch('https://petstore.swagger.io/v2/store/order', options);
+    fetch('https://petstore.swagger.io/v2/store/order', options)
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(data){
+            console.log(data);
+            if(data.id){
+                success.style.display = 'flex';
+            }
+            else{
+                alert("Error, someething bad happened")
+            }
+            })
 
-document.querySelector('.confirmation').remove();
+    document.querySelector('.confirmation').remove();
 
+}
+
+
+
+//Additional functionality
+
+function clearValue(){
+    input.value = ''
+}
+
+function removeParent(){
+    document.querySelector('.confirmation').remove();
+}
+
+function hideSuccess(){
+    success.style = 'display: none;';
 }
 
 Init();
 
 
-/* const obj = 
-{
-    "id": 0,
-    "petId": 0,
-    "quantity": 0,
-    "shipDate": "2021-01-19T21:20:27.538Z",
-    "status": "placed",
-    "complete": true
-  }
-
-
-const options = {
-    method: 'POST',
-    headers: {
-        'Content-type' : 'application/json'
-    },
-    body:JSON.stringify(obj)
-};
-
-fetch('https://petstore.swagger.io/v2/store/order', options) */
